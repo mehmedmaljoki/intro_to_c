@@ -1,0 +1,4 @@
+hello I am gere
+testing reading files
+i have more lines
+and this should' be the $%& ending

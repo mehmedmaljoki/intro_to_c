@@ -1,0 +1,62 @@
+# Compiled object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Static Libraries
+*.lib
+*.a
+
+# Compiled Dynamic Libraries
+*.dll
+*.so
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+*.mod
+*.map
+
+# Dependency Files
+*.d
+
+# Coverage
+*.gcda
+*.gcno
+*.gcov
+
+# Build directories
+build/
+Build/
+Debug/
+debug/
+Release/
+release/
+
+# IDE and editor specific files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs
+*.log
+
+# Generated Makefiles
+Makefile
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
