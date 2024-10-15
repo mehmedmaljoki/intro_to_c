@@ -49,12 +49,12 @@ cmake_ninja_workdir = C$:/development/c/cmake-build-debug/
 
 build cmake_object_order_depends_target_c: phony || .
 
-build CMakeFiles/c.dir/tic_tac_toe.c.obj: C_COMPILER__c_unscanned_Debug C$:/development/c/tic_tac_toe.c || cmake_object_order_depends_target_c
-  DEP_FILE = CMakeFiles\c.dir\tic_tac_toe.c.obj.d
+build CMakeFiles/c.dir/examples/endian.c.obj: C_COMPILER__c_unscanned_Debug C$:/development/c/examples/endian.c || cmake_object_order_depends_target_c
+  DEP_FILE = CMakeFiles\c.dir\examples\endian.c.obj.d
   FLAGS = -g -std=gnu99 -fdiagnostics-color=always
   INCLUDES = -IC:/development/c/.
   OBJECT_DIR = CMakeFiles\c.dir
-  OBJECT_FILE_DIR = CMakeFiles\c.dir
+  OBJECT_FILE_DIR = CMakeFiles\c.dir\examples
 
 
 # =============================================================================
@@ -64,7 +64,7 @@ build CMakeFiles/c.dir/tic_tac_toe.c.obj: C_COMPILER__c_unscanned_Debug C$:/deve
 #############################################
 # Link the executable c.exe
 
-build c.exe: C_EXECUTABLE_LINKER__c_Debug CMakeFiles/c.dir/tic_tac_toe.c.obj
+build c.exe: C_EXECUTABLE_LINKER__c_Debug CMakeFiles/c.dir/examples/endian.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\c.dir
