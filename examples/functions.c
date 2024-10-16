@@ -4,6 +4,10 @@
 // Forward declaration
 int average(int, int);
 
+void swap(int a, int b) {
+
+}
+
 int main() {
     int fn_val = average(10, 20);
     fn_val = average(10, 20);
