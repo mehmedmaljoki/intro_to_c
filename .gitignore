@@ -45,6 +45,7 @@ Debug/
 debug/
 Release/
 release/
+cmake-build-debug/
 
 # IDE and editor specific files
 .vscode/
