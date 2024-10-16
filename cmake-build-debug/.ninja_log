@@ -1,9 +1,0 @@
-# ninja log v6
-1	129	7504686845030386	CMakeFiles/c.dir/typedef.c.obj	a4418a227e08c9d1
-145	307	7506417205211943	c.exe	c0256c7f8cf4358e
-7	134	7504695065442373	CMakeFiles/c.dir/quiz_game.c.obj	8533ea785bdabc52
-6	144	7506417203829476	CMakeFiles/c.dir/tic_tac_toe.c.obj	4bd494c447d07f75
-8	191	7505957827178772	CMakeFiles/c.dir/writing_files.c.obj	1c200f40b6483476
-3	153	7505961442638306	CMakeFiles/c.dir/reading_files.c.obj	d401626501f2c359
-3	324	7507192083834737	CMakeFiles/c.dir/examples/endian.c.obj	f71163bc0bf89737
-326	771	7507192087065712	c.exe	b77ba8411f963309
