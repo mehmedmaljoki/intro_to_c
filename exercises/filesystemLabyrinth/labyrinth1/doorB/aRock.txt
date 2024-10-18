@@ -1,2 +1,0 @@
-This is just a rock
-Better go back using 'cd ..'
