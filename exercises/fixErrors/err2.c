@@ -3,6 +3,6 @@
 int main(int argc, char **argv) {
   char *p = "Hello\n";
   char **p2 = &p;
-  printf(**p2);
+  printf("Das ist der pointer%p\n", *p2);
   return 0;
 }
