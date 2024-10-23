@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -24,7 +25,34 @@ int post_increment(int *val) {
     return old_val;
 }
 
+void bswap32_in_place(int *bytes) {
+    // from OxDE.AD.BE.EF to => 0xEF.BE.AD.DE
+    // *bytes ~ 00 11 22 33
+    // 1. swap 00 <-> 33 => 33 11 22 00
+    int swapped = 0;
+    swapped |= (*bytes >> 24) & 0xFF00;    // 00 00 00 00
+    swapped |= *bytes << 24;    // 33 00 00 00
+    // 2. swap 11 <-> 22 => 33 22 11 00
+    swapped |= (*bytes >> 8) & 0xFF00;          // 00 00 11 00
+    swapped |= (*bytes << 8) & 0xFF0000;        // 00 22 00 00
+    *bytes = swapped;
+}
+
+void bswap32_in_place_better(int *input) {
+    // from OxDE.AD.BE.EF to => 0xEF.BE.AD.DE
+    // *bytes ~ 00 11 22 33
+    // 1. swap 00 <-> 33 => 33 11 22 00
+    uint8_t *bytes = (uint8_t *) input;
+    int swapped = 0;
+    for (int i = 0; i < sizeof(int); i++) {
+        *((uint8_t *) &swapped + (3 - i)) = *(bytes + i);
+    }
+
+    *input = swapped;
+}
+
 int main() {
+#if 0
     int a = 7;
     int b = 43;
     printf("(before swap method) a = %d, b = %d\n", a, b);
@@ -39,6 +67,17 @@ int main() {
     // In Java, method parameters are evaluated left to right
     // In C, function parameters are (usually) evaluated right to left
     printf("pre_increment(a): %d, %d, %d\n", a, pre_increment(&a), a);
+#endif
+
+    int sample = 0x00112233;
+    bswap32_in_place(&sample);
+
+    printf("0x%x\n", sample);
+
+    int sample2 = 0xBEEFCAFE;
+    bswap32_in_place_better(&sample2);
+
+    printf("0x%x\n", sample2);
 
     return EXIT_SUCCESS;
 }
