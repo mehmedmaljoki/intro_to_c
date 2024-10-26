@@ -1,5 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+
+static const int ARR_SIZE = 8;
 
 void swap(char *a, char *b)
 {
@@ -33,6 +36,14 @@ void print_array(int array[], int size) {
         printf("%d ", array[i]);
     }
     puts("");
+}
+
+void print_2Dimensions(int *arr, int arr_rows, int arr_cols) {
+    for (int row = 0; row < arr_rows; row++) {
+        for (int col = 0; col < arr_cols; col++) {
+            printf("arr[%2d][%2d] = %d\n", row, col, arr[row * arr_cols + 1]);
+        }
+    }
 }
 
 int main()
@@ -78,5 +89,15 @@ int main()
     bubble_sort_array(array, size);
     print_array(array, size);
 
-    return 0;
+    puts("+++++++++++++++++++test 2Dim Array+++++++++++++++++++");
+
+    int arr[ARR_SIZE][ARR_SIZE];
+    for (int i = 0; i < ARR_SIZE; i++) {
+        for (int j = 0; j < ARR_SIZE; j++) {
+            arr[i][j] = i * j;
+        }
+    }
+
+    print_2Dimensions(arr, ARR_SIZE, ARR_SIZE);
+    return EXIT_SUCCESS;
 }
