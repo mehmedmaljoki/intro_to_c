@@ -38,6 +38,13 @@ void print_array(int array[], int size) {
     puts("");
 }
 
+void print_arrayBeautify(int array[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d\n", array[i]);
+    }
+    puts("");
+}
+
 void print_2Dimensions(int *arr, int arr_rows, int arr_cols) {
     for (int row = 0; row < arr_rows; row++) {
         for (int col = 0; col < arr_cols; col++) {
@@ -45,6 +52,21 @@ void print_2Dimensions(int *arr, int arr_rows, int arr_cols) {
         }
     }
 }
+
+// {return type} (*{name of the function})(arg1, arg2, ..)
+// in Java:Function<Int>
+void map(int *arr, int arr_size, int *(transform)(int)) {
+    // apply transform to all elements in arr
+    for (int i = 0; i < arr_size; i++) {
+        arr[i] = transform(arr[i]);
+    }
+}
+
+// in Java: x -> x * 2
+int mul2(int val) {
+    return val * 2;
+}
+
 
 int main()
 {
@@ -99,5 +121,13 @@ int main()
     }
 
     print_2Dimensions(arr, ARR_SIZE, ARR_SIZE);
+
+    puts("+++++++++++++++++ Function Pointers ++++++++++++++++++");
+
+    int myArray[] = {1,2,3,4,5,6};
+    // Java: map(arr, arr.length, x -> x * 2)
+    // apply mul2 to every value in arr
+    map(myArray, ARR_SIZE, mul2);
+    print_arrayBeautify(myArray, 5);
     return EXIT_SUCCESS;
 }
