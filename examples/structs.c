@@ -21,6 +21,7 @@ struct student {
 };
 
 // not aligned; dont use without good reason
+// it helps to reduce the size of the struct
 #pragma pack(push, 1)
 struct new_student {
     char *name;
