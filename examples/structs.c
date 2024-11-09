@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -49,6 +50,32 @@ void student_report(struct student *s) {
     printf("GPA: %.2f\n", s->gpa);
     printf("Full Time: %s\n", s->is_full_time ? "Yes" : "No");
     printf("Loan Outstanding: %.2Lf\n", s->loan_outstanding);
+}
+
+struct heap_student {
+    char *name;
+    char *initials;
+    double gpa;
+    int id;
+    int credit_hrs;
+};
+
+
+struct heap_student make_student(char *name, int id, int num_initials) {
+    return (struct heap_student){
+        .name = name,
+        .id = id,
+        // allocate memory on heap bc we dont know the size of the initials
+        // pls cast bc malloc returns void * and C has a weak type system
+        // malloc returns memory address in dynamic memory where the memory you asked was allocated, but
+        // if it was not able to allocate memory, it will return NULL (for example memory is full)
+        .initials = (char *) malloc(num_initials * sizeof(char)),
+
+        // calloc initializes the memory to 0
+        // mostly you will not need it bc you would have to initialize the memory anyway
+        // .initials = (char *) calloc(num_initials, sizeof(char)),
+
+    };
 }
 
 int main() {
@@ -105,5 +132,31 @@ int main() {
     printf("offset of initials: %zu\n", offsetof(struct good_alignment_student, initials));
     printf("offset of gpa: %zu\n", offsetof(struct good_alignment_student, gpa));
     printf("offset of credit_hours: %zu\n", offsetof(struct good_alignment_student, credit_hours));
+
+    puts("*********************");
+
+    // init a student on stack
+    for (int i = 0; i < 5; i++) {
+        struct heap_student student_on_heap = make_student("Heap Student", 12345, 2);
+        student_on_heap.initials[0] = 'T';
+        student_on_heap.initials[1] = 'S';
+        student_on_heap.initials[2] = 0;
+
+        printf("Initials: %s\n", student_on_heap.initials);
+        assert(student_on_heap.initials != NULL);
+
+        // another way to allocate memory is with realloc
+        // realloc is used to change the size of the memory block that was previously allocated using malloc or calloc
+        // if the memory block is not enough, it will allocate a new memory block, copy the data from the old memory block to the new memory block, and free the old memory block
+        student_on_heap.initials = realloc(student_on_heap.initials, 4 * sizeof(char));
+        assert(student_on_heap.initials != NULL);
+
+        // free the memory allocated on heap
+        free(student_on_heap.initials);
+    }
+    // student_on_heap.initials[0] = 'H';
+    // student_on_heap.initials[1] = 'S';
+
+
     return EXIT_SUCCESS;
 }
