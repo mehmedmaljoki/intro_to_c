@@ -6,6 +6,7 @@
 
 #ifndef C4JP_VECTOR_H_INCLUDED
 #define C4JP_VECTOR_H_INCLUDED
+#include <stddef.h>
 
 struct vector {
     size_t size; /**< The number of elements stored in the vector. */

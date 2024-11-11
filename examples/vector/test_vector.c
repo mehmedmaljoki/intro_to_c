@@ -60,6 +60,26 @@ static void test_vector_add_with_resize(void) {
 
 }
 
+static void test_insert_into_empty_vector(void) {
+    vector_insert(&vec, 0, 42);
+    TEST_ASSERT_EQUAL_INT(42, vec.con[0]);
+    TEST_ASSERT_EQUAL(vector_get(&vec, 0), 42);
+    TEST_ASSERT_EQUAL_INT(1, vec.size);
+}
+
+static void test_insert_into_front_of_vector(void) {
+    vector_add(&vec, 42);
+    vector_add(&vec, 43);
+    vector_insert(&vec, 0, 41);
+    TEST_ASSERT_EQUAL_INT(41, vec.con[0]);
+    TEST_ASSERT_EQUAL(vector_get(&vec, 0), 41);
+    TEST_ASSERT_EQUAL_INT(42, vec.con[1]);
+    TEST_ASSERT_EQUAL(vector_get(&vec, 1), 42);
+    TEST_ASSERT_EQUAL_INT(43, vec.con[2]);
+    TEST_ASSERT_EQUAL(vector_get(&vec, 2), 43);
+    TEST_ASSERT_EQUAL_INT(3, vec.size);
+}
+
 
 int main() {
     UnityBegin("test_vector.c");
@@ -69,6 +89,8 @@ int main() {
     RUN_TEST(test_vector_add_single_element);
     RUN_TEST(test_add_multiple_elements);
     RUN_TEST(test_vector_add_with_resize);
+    RUN_TEST(test_insert_into_empty_vector);
+    RUN_TEST(test_insert_into_front_of_vector);
 
     return UnityEnd();
 }
