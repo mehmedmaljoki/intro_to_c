@@ -47,7 +47,9 @@ void vector_insert(struct vector *vec, size_t index, int value) {
     // shift elements after the index down
     if (index != vec->size) {
         // in Java like System.arraycopy
-        memmove(vec->con + index + 1, vec->con + index, (vec->size - index) * sizeof(int));
+        memmove(vec->con + index + 1,
+                vec->con + index,
+                (vec->size - index) * sizeof(int));
     }
     vec->con[index] = value;
     vec->size++;
