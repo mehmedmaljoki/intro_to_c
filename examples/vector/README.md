@@ -44,4 +44,4 @@ vector_free(&vec);
 
 ### Based on
 
-Wikipedia - https://en.wikipedia.org/wiki/Narcissistic_number
+Wikipedia - https://medium.com/@adam.rizk9/the-c-equivalent-to-javas-arraylist-exploring-std-vector-b3a4afc8e9c6
