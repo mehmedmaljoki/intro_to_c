@@ -6,7 +6,7 @@
 static struct vector vec;
 
 void setUp(void) {
-    vec = vector_create(10);  // Initialize vec in setUp
+    vec = vector_create(10, sizeof(short));
 }
 
 void tearDown(void) {
@@ -31,80 +31,71 @@ static void test_vector_destroy_works(void) {
 }
 
 static void test_vector_add_single_element(void) {
-    vector_add(&vec, 42);
+    short a = 42;
+    vector_add(&vec, &a);
     TEST_ASSERT_EQUAL_INT(42, vec.con[0]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 0), 42);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 0)), 42);
     TEST_ASSERT_EQUAL_INT(1, vec.size);
 }
 
 static void test_add_multiple_elements(void) {
-    vector_add(&vec, 42);
-    vector_add(&vec, 43);
-    vector_add(&vec, 44);
-    TEST_ASSERT_EQUAL_INT(42, vec.con[0]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 0), 42);
-    TEST_ASSERT_EQUAL_INT(43, vec.con[1]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 1), 43);
-    TEST_ASSERT_EQUAL_INT(44, vec.con[2]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 2), 44);
+    short a = 42, b = 43, c = 44;
+    vector_add(&vec, &a);
+    vector_add(&vec, &b);
+    vector_add(&vec, &c);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 0)), 42);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 1)), 43);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 2)), 44);
     TEST_ASSERT_EQUAL_INT(3, vec.size);
 }
 
 static void test_vector_add_with_resize(void) {
-    for (int i = 0; i < 11; i++) {
-        vector_add(&vec, i);
+    for (short i = 0; i < 11; i++) {
+        vector_add(&vec, &i);
     }
-    TEST_ASSERT_EQUAL_INT(11, vec.size);
-    TEST_ASSERT_EQUAL(10, vec.con[10]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 10), 10);
-
+    TEST_ASSERT_EQUAL(11, vec.size);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 10)), 10);
 }
 
 static void test_insert_into_empty_vector(void) {
-    vector_insert(&vec, 0, 42);
-    TEST_ASSERT_EQUAL_INT(42, vec.con[0]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 0), 42);
-    TEST_ASSERT_EQUAL_INT(1, vec.size);
+    short a = 42;
+    vector_insert(&vec, 0, &a);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 0)), 42);
+    TEST_ASSERT_EQUAL(1, vec.size);
 }
 
 static void test_insert_into_front_of_vector(void) {
-    vector_add(&vec, 42);
-    vector_add(&vec, 43);
-    vector_insert(&vec, 0, 41);
-    TEST_ASSERT_EQUAL_INT(41, vec.con[0]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 0), 41);
-    TEST_ASSERT_EQUAL_INT(42, vec.con[1]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 1), 42);
-    TEST_ASSERT_EQUAL_INT(43, vec.con[2]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 2), 43);
-    TEST_ASSERT_EQUAL_INT(3, vec.size);
+    short a = 42, b = 43, c = 41;
+    vector_add(&vec, &a);
+    vector_add(&vec, &b);
+    vector_insert(&vec, 0, &c);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 0)), 41);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 1)), 42);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 2)), 43);
+    TEST_ASSERT_EQUAL(3, vec.size);
 }
 
 
 static void test_insert_at_back_of_vector(void) {
-    vector_add(&vec, 42);
-    vector_add(&vec, 43);
-    vector_insert(&vec, 2, 44);
-    TEST_ASSERT_EQUAL_INT(42, vec.con[0]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 0), 42);
-    TEST_ASSERT_EQUAL_INT(43, vec.con[1]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 1), 43);
-    TEST_ASSERT_EQUAL_INT(44, vec.con[2]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 2), 44);
-    TEST_ASSERT_EQUAL_INT(3, vec.size);
+    short a = 42, b = 43, c = 44;
+    vector_add(&vec, &a);
+    vector_add(&vec, &b);
+    vector_insert(&vec, 2, &c);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 0)), 42);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 1)), 43);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 2)), 44);
+    TEST_ASSERT_EQUAL(3, vec.size);
 }
 
 static void test_insert_in_the_middle_of_vector(void) {
-    vector_add(&vec, 42);
-    vector_add(&vec, 43);
-    vector_insert(&vec, 1, 41);
-    TEST_ASSERT_EQUAL_INT(42, vec.con[0]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 0), 42);
-    TEST_ASSERT_EQUAL_INT(41, vec.con[1]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 1), 41);
-    TEST_ASSERT_EQUAL_INT(43, vec.con[2]);
-    TEST_ASSERT_EQUAL(vector_get(&vec, 2), 43);
-    TEST_ASSERT_EQUAL_INT(3, vec.size);
+    short a = 42, b = 43, c = 41;
+    vector_add(&vec, &a);
+    vector_add(&vec, &b);
+    vector_insert(&vec, 1, &c);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 0)), 42);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 1)), 41);
+    TEST_ASSERT_EQUAL(*((short *) vector_get(&vec, 2)), 43);
+    TEST_ASSERT_EQUAL(3, vec.size);
 }
 
 int main() {

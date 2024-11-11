@@ -11,7 +11,8 @@
 struct vector {
     size_t size; /**< The number of elements stored in the vector. */
     size_t capacity; /**< The maximum number of elements that can be stored in the vector. */
-    int *con; /**< The actual elements in the vector, as an array. */
+    size_t element_size; /**< The number of bytes each element occupies. */
+    char *con; /**< The actual elements in the vector, as an array. */
 };
 
 /**
@@ -20,7 +21,7 @@ struct vector {
  * @param initial_capacity The initial capacity of the vector.
  * @return The newly created vector.
  */
-struct vector vector_create(size_t initial_capacity);
+struct vector vector_create(size_t initial_capacity, size_t element_size);
 
 /**
 * Deallocates the dynamic memory held by the vector.
@@ -35,7 +36,7 @@ void vector_destroy(struct vector *vec);
  * @param vec The vector to add the element to.
  * @param value The value to add to the vector.
  */
-void vector_add(struct vector *vec, int value);
+void vector_add(struct vector *vec, void *value);
 
 /**
  * Retrieves the element at the given index in the vector.
@@ -44,7 +45,7 @@ void vector_add(struct vector *vec, int value);
  * @param index The index of the element to retrieve.
  * @return The element at the given index.
  */
-int vector_get(struct vector *vec, size_t index);
+void *vector_get(struct vector *vec, size_t index);
 
 /**
  * Inserts an element at the given index in the vector.
@@ -53,6 +54,6 @@ int vector_get(struct vector *vec, size_t index);
  * @param index The index at which to insert the element.
  * @param value The value to insert into the vector.
  */
-void vector_insert(struct vector *vec, size_t index, int value);
+void vector_insert(struct vector *vec, size_t index, void *value);
 
 #endif //C4JP_VECTOR_H_INCLUDED
