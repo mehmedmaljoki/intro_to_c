@@ -1,3 +1,0 @@
-You found me! Did you know that a hidden file may also be a directory?
-
-I'm just a file, but I saw a hidden directory somewhere else...

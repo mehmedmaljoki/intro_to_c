@@ -1,3 +1,0 @@
-Learn how to use the repairSpell!
-
-(it's just a shell function, that you can add to your shell by sourcing the file repairShell.sh)

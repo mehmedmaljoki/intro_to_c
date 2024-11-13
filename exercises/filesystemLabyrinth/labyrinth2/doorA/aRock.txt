@@ -1,4 +1,0 @@
-This is just a rock
-Better go back using 'cd ..'
-
-(This seems to be magical rock that can be at multiple places at once.)
