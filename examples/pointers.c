@@ -51,6 +51,16 @@ void bswap32_in_place_better(int *input) {
     *input = swapped;
 }
 
+//wont change the callers str
+void foo(char *str){
+    str = "Not a new string";
+}
+
+//will change the callers str
+void foo1(char **str){
+    *str = "New String!\n";
+}
+
 int main() {
 #if 0
     int a = 7;
@@ -78,6 +88,15 @@ int main() {
     bswap32_in_place_better(&sample2);
 
     printf("0x%x\n", sample2);
+
+
+    // pls think how this works
+    char *str = "Initial String\n";
+    printf("str = %s\n", str);
+    foo(str);
+    printf("str = %s\n", str);
+    foo1(&str);
+    printf("str = %s\n", str);
 
     return EXIT_SUCCESS;
 }
