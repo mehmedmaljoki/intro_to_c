@@ -1,14 +1,17 @@
 .PHONY: all
 
+CC = gcc
+CFLAGS = -std=c99 -Wall -pedantic
+
 all: main
 
 main: main.o list.o
-	gcc -std=c99 -Wall -pedantic -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 list.o: list.c list.h
-	gcc -std=c99 -Wall -pedantic -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 main.o: main.c list.h
-	gcc -std=c99 -Wall -pedantic -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 list.o: list.c list.h
