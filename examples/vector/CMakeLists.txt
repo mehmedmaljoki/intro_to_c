@@ -9,4 +9,6 @@ include_directories(.)
 #                 test.h
 #        test.c)
 #add_executable(c vector.c)
-add_executable(c ../unions.c)
+add_executable(c ../unions.c
+        ../../exercises/exercise0/doublyLinkedList/list.c
+        ../../exercises/exercise0/doublyLinkedList/main.c)

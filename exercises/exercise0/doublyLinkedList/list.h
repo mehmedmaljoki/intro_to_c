@@ -25,16 +25,16 @@ node* backward(node *head);
 node* delete(node *head);
 
 // make double linked list a ring
-node* ring(node *head);
+void makeRing(node *head);
 
 // split the ring into regular list
-node* split(node *head);
+void splitRing(node *head);
 
 // Write a function that destroys a linked list, freeing up all the memory it used for nodes (but don't worry about the data strings)
-void destroy(node *head);
+void freeList(node *head);
 
 // Write another function that destroys a linked list, but also frees up the memory used by the data strings. (be careful to only use strings you can actually free when testing this)
-void destroyWithStrings(node *head);
+void freeListAndData(node *head);
 
 // Write a function to append a whole list to another list.
 node* appendList(node *head, node *tail);
